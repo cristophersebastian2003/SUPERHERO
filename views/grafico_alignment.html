@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gráfico de alineación de superhéroes</title>
+    <!-- Incluye Chart.js desde una CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width: 80%; margin: auto;">
+        <canvas id="alignmentChart"></canvas>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Obtén datos de la base de datos utilizando fetch
+            fetch('../models/alignment.php')
+                .then(response => response.json())
+                .then(data => {
+                    // Llama a la función para crear el gráfico
+                    createChart(data);
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        function createChart(data) {
+            // Extrae las etiquetas y datos del conjunto de datos
+            const labels = data.map(item => item.alignment);
+            const datasetData = data.map(item => item.id);
+
+            // Crea el gráfico
+            const ctx = document.getElementById('alignmentChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Superhéroes por alineación',
+                        data: datasetData,
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 205, 86, 1)',
+                            'rgba(54, 162, 235, 1)',
+                        ],
+                        borderWidth: 1,
+                    }],
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        },
+                    },
+                },
+            });
+        }
+    </script>
+</body>
+</html>
