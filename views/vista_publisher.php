@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function cargarOpcionesEditores() {
-    fetch('../models/publisher.php')
+    fetch('../controllers/publisher.controller.php')
         .then(response => response.json())
         .then(data => {
             const selectEditor = document.getElementById('selectEditor');
@@ -163,7 +163,7 @@ function cargarOpcionesEditores() {
 function cargarSuperheroesPorEditor() {
     const editorId = document.getElementById('selectEditor').value;
 
-    fetch(`../models/superhero.php?editorId=${editorId}`)
+    fetch(`../controllers/superhero.controller.php?editorId=${editorId}`)
         .then(response => response.json())
         .then(data => {
             mostrarSuperheros(data);
