@@ -1,0 +1,1 @@
+inciar primero el archivo "vista_publisher.php" que esta en la carpeta VIEWS
