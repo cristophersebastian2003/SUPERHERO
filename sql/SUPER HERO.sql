@@ -1241,3 +1241,17 @@ END //
 DELIMITER ;
 
 CALL  spu_superhero_listar_por_editor(2)
+
+DELIMITER //
+
+CREATE PROCEDURE spu_ObtenerSuperheroesPorEditor_buscar(IN editorId INT)
+BEGIN
+    SELECT alignment_id, COUNT(*) AS total
+    FROM superhero
+    WHERE publisher_id = editorId
+    GROUP BY alignment_id;
+END //
+
+DELIMITER ;
+
+CALL spu_ObtenerSuperheroesPorEditor_buscar(1)
